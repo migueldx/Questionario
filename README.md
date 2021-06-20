@@ -5,16 +5,16 @@ Aplicativo Web ASP.NET (.NET Framework) C#
 
 O que foi utilizado:
 
-Visual Studio 2019
+-Visual Studio 2019;
 
-.NET Framework 4.7.2
+-.NET Framework 4.7.2;
 
-MVC
+-MVC;
 
-Entity Framework 6
+-Entity Framework 6;
 
-Bootstrap
+-Bootstrap;
 
-LocalDB SQL Server
+-LocalDB SQL Server.
 
 
