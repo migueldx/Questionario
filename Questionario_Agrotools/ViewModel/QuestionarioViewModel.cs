@@ -11,5 +11,12 @@ namespace Questionario_Agrotools.ViewModel
         public Questionario Questionario { get; set; }
         public string Perguntas { get; set; }
         public string Respostas { get; set; }
+        public string LatitudeLongitude { get; set; }
+        public List<Questionario> Questionarios { get; set; }
+
+        public QuestionarioViewModel()
+        {
+            Questionarios = new List<Questionario>();
+        }
     }
 }

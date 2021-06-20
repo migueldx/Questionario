@@ -8,7 +8,7 @@
 <h2>Responder</h2>
 
 
-@using (Html.BeginForm("Responder","Questionario", FormMethod.Post, new { onsubmit = "return PrepararRespostas()" }))
+@using (Html.BeginForm("Responder","Questionario", FormMethod.Post, new { onsubmit = "return OnSubmit()" }))
 {
     @Html.AntiForgeryToken()
     
@@ -18,6 +18,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Questionario.QuestionarioId)
     @Html.HiddenFor(model => model.Respostas)
+    @Html.HiddenFor(model => model.LatitudeLongitude)
 
     <div class="form-group">
         
@@ -55,7 +56,17 @@
 <div>
     @Html.ActionLink("Voltar", "Index")
 </div>
-<script>
+<script >
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(VincularLocalizacao, mostrarErro);
+    }
+    else {
+        window.alert("A Geolocalização não é suportada neste navegador.");
+    }
+    function OnSubmit() {
+        PrepararRespostas();
+        return true;
+    }
     function PrepararRespostas() {
         var respostas = document.getElementsByName("RespostaName");
         document.getElementById("Respostas").value = "";
@@ -65,7 +76,28 @@
                 document.getElementById("Respostas").value += (respostas[i].id+ "þ" + resposta) + (i + 1 < respostas.length ? "µ" : "");
             }
         }
-        return true;
+    }
+    function VincularLocalizacao(posicao) {
+        var latitudeLongitude = posicao.coords.latitude + "," + posicao.coords.longitude;
+        if (latitudeLongitude != "") {
+            document.getElementById("LatitudeLongitude").value = latitudeLongitude;
+            console.log(document.getElementById("LatitudeLongitude").value)
+        }
+    }
+    function mostrarErro(error) {
+        if (error.code == 1) {
+            window.alert("Usuário negou a requisição para geolocalziação.");
+        }
+        else if (error.code == 2) {
+            $window.alert("Localização informada está indisponível.");
+        }
+        else if (error.code == 3) {
+            window.alert("A requisição para obter a localização do usuário expirou.");
+        }
+        else {
+            window.alert("Erro desconhecido.");
+        }
+        
     }
 </script>
 @section Scripts {

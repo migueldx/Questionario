@@ -134,6 +134,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Pergunta.cs" />
     <Compile Include="Models\Questionario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -174,7 +175,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Questionario\Criar.cshtml" />
     <Content Include="Views\Questionario\Delete.cshtml" />
-    <Content Include="Views\Questionario\Details.cshtml" />
+    <Content Include="Views\Questionario\Visualizar.cshtml" />
     <Content Include="Views\Questionario\Responder.cshtml" />
     <Content Include="Views\Questionario\Index.cshtml" />
     <Content Include="Views\Pergunta\Create.cshtml" />
@@ -182,9 +183,6 @@
     <Content Include="Views\Pergunta\Details.cshtml" />
     <Content Include="Views\Pergunta\Edit.cshtml" />
     <Content Include="Views\Pergunta\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -198,6 +196,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

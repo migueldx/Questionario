@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Spatial;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -19,11 +20,14 @@ namespace Questionario_Agrotools.Controllers
         // GET: Questionario
         public ActionResult Index()
         {
-            return View(db.Questionarios.ToList());
+            QuestionarioViewModel questionarioViewModel = new QuestionarioViewModel();
+            questionarioViewModel.Questionarios = db.Questionarios.Include(i => i.Perguntas).ToList();
+            questionarioViewModel.Questionarios.ForEach(q => q.Respondido = q.Perguntas.Where(p => p.DescricaoResposta != null).Any());
+            return View(questionarioViewModel);
         }
 
         // GET: Questionario/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Visualizar(int? id)
         {
             if (id == null)
             {
@@ -59,7 +63,8 @@ namespace Questionario_Agrotools.Controllers
                 {
                     questionarioViewModel.Questionario.Perguntas.Add(new Pergunta
                     {
-                        DescricaoPergunta = pergunta
+                        DescricaoPergunta = pergunta,
+                        DataCadastroResposta = DateTime.Now
                     });
                 }
                 db.Questionarios.Add(questionarioViewModel.Questionario);
@@ -92,7 +97,7 @@ namespace Questionario_Agrotools.Controllers
         // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Responder([Bind(Include = "Questionario,Respostas")] QuestionarioViewModel questionarioViewModel)
+        public ActionResult Responder([Bind(Include = "Questionario,Respostas,LatitudeLongitude")] QuestionarioViewModel questionarioViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -103,6 +108,8 @@ namespace Questionario_Agrotools.Controllers
                     var descricaoResposta = resposta.Split('þ')[1];
                     Pergunta pergunta = db.Perguntas.Find(Convert.ToInt32(perguntaId));
                     pergunta.DescricaoResposta = descricaoResposta;
+                    pergunta.DataCadastroResposta = DateTime.Now;
+                    pergunta.Localizacao = DbGeography.FromText("POINT( " + questionarioViewModel.LatitudeLongitude + ")");
                     db.Entry(pergunta).State = EntityState.Modified;
                 }
                 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -21,6 +22,9 @@ namespace Questionario_Agrotools.Models
         public DateTime DataCadastro { get; set; }
 
         public ICollection<Pergunta> Perguntas { get; set; }
+        [NotMapped]
+        [DisplayName("Respondido")]
+        public bool Respondido { get; set; }
 
         public Questionario()
         {

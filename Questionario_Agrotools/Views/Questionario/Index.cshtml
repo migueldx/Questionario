@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Questionario_Agrotools.Models.Questionario>
+﻿@model Questionario_Agrotools.ViewModel.QuestionarioViewModel
 
 @{
     ViewBag.Title = "Questionário";
@@ -13,34 +13,50 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Titulo)
+            @Html.DisplayNameFor(model => model.Questionario.Titulo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Usuario)
+            @Html.DisplayNameFor(model => model.Questionario.Usuario)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DataCadastro)
+            @Html.DisplayNameFor(model => model.Questionario.DataCadastro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Questionario.Respondido)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Titulo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataCadastro)
-        </td>
-        <td>
-            @Html.ActionLink("Responder", "Responder", new { id=item.QuestionarioId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.QuestionarioId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.QuestionarioId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Questionarios)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Titulo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Usuario)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DataCadastro)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Respondido)
+    </td>
+    <td>
+        @if (!item.Respondido)
+        {
+            @Html.ActionLink("Responder", "Responder", new { id = item.QuestionarioId }) @Html.Raw(" |")
+        }
+        else
+        {
+            @Html.ActionLink("Visualizar", "Visualizar", new { id = item.QuestionarioId }) @Html.Raw(" |")
+        }
+
+
+
+        @Html.ActionLink("Delete", "Delete", new { id = item.QuestionarioId })
+    </td>
+</tr>
+    }
 
 </table>

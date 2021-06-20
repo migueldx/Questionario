@@ -8,7 +8,7 @@
 <h2>Criar</h2>
 
 
-@using (Html.BeginForm("Create","Questionario", FormMethod.Post, new { onsubmit = "return PrepararPerguntas()"}))
+@using (Html.BeginForm("Criar","Questionario", FormMethod.Post, new { onsubmit = "return PrepararPerguntas()"}))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model=>model.Perguntas)

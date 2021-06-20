@@ -7,6 +7,6 @@ namespace Questionario_Agrotools.Contexto
     {
         public DbSet<Questionario> Questionarios { get; set; }
 
-        public System.Data.Entity.DbSet<Questionario_Agrotools.Models.Pergunta> Perguntas { get; set; }
+        public DbSet<Pergunta> Perguntas { get; set; }
     }
 }
