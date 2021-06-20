@@ -1,0 +1,86 @@
+﻿@model Questionario_Agrotools.ViewModel.QuestionarioViewModel
+
+@{
+    ViewBag.Title = "Criar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Criar</h2>
+
+
+@using (Html.BeginForm("Create","Questionario", FormMethod.Post, new { onsubmit = "return PrepararPerguntas()"}))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model=>model.Perguntas)
+    <div class="form-horizontal">
+        <h4>Questionário</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Questionario.Titulo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Questionario.Titulo, new { htmlAttributes = new { @class = "form-control", placeholder = "Título do Questionário" } })
+                @Html.ValidationMessageFor(model => model.Questionario.Titulo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Questionario.Usuario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Questionario.Usuario, new { htmlAttributes = new { @class = "form-control", placeholder = "Nome do Usuário" } })
+                @Html.ValidationMessageFor(model => model.Questionario.Usuario, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div id="PerguntasDiv">
+            <div class="form-group">
+                <label class="control-label col-md-2">Pergunta 1</label>
+                <div class="col-md-10">
+                    <input class="form-control" id="Pergunta_1" name="PerguntasName" type="text" placeholder="Pergunta 1" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-10">
+                <input class="btn btn-group" type="button" onclick="AdicionarPergunta()" value="Adicionar" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Criar" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>
+<script>
+    var i = 2;
+    var arrayPerguntas = new Array();
+    function AdicionarPergunta() {
+        const div = document.createElement('div');
+        div.className = 'form-group';
+        div.innerHTML = "<label class='control-label col-md-2'>Pergunta " + i + "</label>" +
+            "<div class='col-md-10'>" +
+            "<input class='form-control' id='Pergunta_" + i + "' name='PerguntasName' type='text' placeholder='Pergunta " + i++ + "' />" +
+            " </div>";
+        document.getElementById('PerguntasDiv').appendChild(div);
+    }
+    function PrepararPerguntas() {
+        var perguntas = document.getElementsByName("PerguntasName");
+        document.getElementById("Perguntas").value = "";
+        for (var i = 0; i < perguntas.length; i++) {
+            var pergunta = perguntas[i].value;
+            if (pergunta != "") {
+                document.getElementById("Perguntas").value += pergunta + (i + 1 < perguntas.length ? "µ" : "");
+            }
+        }
+        return true;
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

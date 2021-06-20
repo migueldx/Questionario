@@ -1,0 +1,73 @@
+﻿@model Questionario_Agrotools.ViewModel.QuestionarioViewModel
+
+@{
+    ViewBag.Title = "Questionário";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Responder</h2>
+
+
+@using (Html.BeginForm("Responder","Questionario", FormMethod.Post, new { onsubmit = "return PrepararRespostas()" }))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Questionário</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Questionario.QuestionarioId)
+    @Html.HiddenFor(model => model.Respostas)
+
+    <div class="form-group">
+        
+        <div class="col-md-12">
+            <h4>
+                @Html.DisplayFor(model => model.Questionario.Titulo)
+            </h4>
+        </div>
+    </div>
+    @{int i = 1;}
+    @foreach (var item in Model.Questionario.Perguntas)
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                @(i++))
+                @Html.DisplayFor(modelItem => item.DescricaoPergunta)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2"></div>
+            <div class="col-md-10">
+                <input class="form-control" id="@item.PerguntaId" name="RespostaName" type="text" placeholder="Resposta" />
+            </div>
+        </div>
+    }
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>
+<script>
+    function PrepararRespostas() {
+        var respostas = document.getElementsByName("RespostaName");
+        document.getElementById("Respostas").value = "";
+        for (var i = 0; i < respostas.length; i++) {
+            var resposta = respostas[i].value;
+            if (resposta != "") {
+                document.getElementById("Respostas").value += (respostas[i].id+ "þ" + resposta) + (i + 1 < respostas.length ? "µ" : "");
+            }
+        }
+        return true;
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

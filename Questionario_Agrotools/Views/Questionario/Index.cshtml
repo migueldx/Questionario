@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Questionario_Agrotools.Models.Questionario>
+
+@{
+    ViewBag.Title = "Questionário";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Questionário</h2>
+
+<p>
+    @Html.ActionLink("Criar", "Criar")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataCadastro)
+        </td>
+        <td>
+            @Html.ActionLink("Responder", "Responder", new { id=item.QuestionarioId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.QuestionarioId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.QuestionarioId })
+        </td>
+    </tr>
+}
+
+</table>
