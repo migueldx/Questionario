@@ -18,6 +18,9 @@ namespace Questionario_Agrotools.Models
         public string DescricaoResposta { get; set; }
         public int QuestionarioId { get; set; }
         public Questionario Questionario { get; set; }
+        [DisplayName("Data da Resposta")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataCadastroResposta { get; set; }
         public DbGeography Localizacao { get; set; }
 

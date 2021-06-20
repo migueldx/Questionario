@@ -13,13 +13,28 @@
 
     <h4>@Html.DisplayFor(model => model.Titulo)</h4>
     <dl class="dl-horizontal">
+
         @{int i = 1;}
         @foreach (var item in Model.Perguntas)
         {
+
+
+            <dd></dd>
             <dt>@(i++))</dt>
-            <dd>@Html.DisplayFor(itemModel => item.DescricaoPergunta, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })</dd>
+            <dd><b>@Html.DisplayFor(itemModel => item.DescricaoPergunta)</b></dd>
             <dt></dt>
-            <dd>@Html.EditorFor(itemModel => item.DescricaoResposta, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })</dd>
+            <dd>@Html.DisplayFor(itemModel => item.DescricaoResposta)</dd>
+            if (i > Model.Perguntas.Count)
+            {
+                <br />
+                <dt>@Html.DisplayNameFor(itemModel=>item.DataCadastroResposta)</dt>
+                <dd>@Html.DisplayFor(itemModel => item.DataCadastroResposta)</dd>
+                <dt>Latitude</dt>
+                <dd>@Html.DisplayFor(itemModel => item.Localizacao.Latitude)</dd>
+
+                <dt>Longitude</dt>
+                <dd>@Html.DisplayFor(itemModel => item.Localizacao.Longitude)</dd>
+            }
         }
     </dl>
 </div>
