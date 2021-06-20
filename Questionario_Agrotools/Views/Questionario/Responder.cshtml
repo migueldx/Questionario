@@ -78,7 +78,7 @@
         }
     }
     function VincularLocalizacao(posicao) {
-        var latitudeLongitude = posicao.coords.latitude + "," + posicao.coords.longitude;
+        var latitudeLongitude = posicao.coords.latitude + " " + posicao.coords.longitude;
         if (latitudeLongitude != "") {
             document.getElementById("LatitudeLongitude").value = latitudeLongitude;
             console.log(document.getElementById("LatitudeLongitude").value)
