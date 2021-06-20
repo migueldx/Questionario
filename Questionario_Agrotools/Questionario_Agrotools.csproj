@@ -174,7 +174,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Questionario\Criar.cshtml" />
-    <Content Include="Views\Questionario\Delete.cshtml" />
+    <Content Include="Views\Questionario\Apagar.cshtml" />
     <Content Include="Views\Questionario\Visualizar.cshtml" />
     <Content Include="Views\Questionario\Responder.cshtml" />
     <Content Include="Views\Questionario\Index.cshtml" />

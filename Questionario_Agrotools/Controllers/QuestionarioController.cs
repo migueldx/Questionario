@@ -17,7 +17,6 @@ namespace Questionario_Agrotools.Controllers
     {
         private ContextoAgroTools db = new ContextoAgroTools();
 
-        // GET: Questionario
         public ActionResult Index()
         {
             QuestionarioViewModel questionarioViewModel = new QuestionarioViewModel();
@@ -26,7 +25,6 @@ namespace Questionario_Agrotools.Controllers
             return View(questionarioViewModel);
         }
 
-        // GET: Questionario/Details/5
         public ActionResult Visualizar(int? id)
         {
             if (id == null)
@@ -41,15 +39,11 @@ namespace Questionario_Agrotools.Controllers
             return View(questionario);
         }
 
-        // GET: Questionario/Create
         public ActionResult Criar()
         {
             return View();
         }
 
-        // POST: Questionario/Create
-        // Para se proteger de mais ataques, habilite as propriedades específicas às quais você quer se associar. Para 
-        // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Criar([Bind(Include = "Questionario,Perguntas")] QuestionarioViewModel questionarioViewModel)
@@ -75,7 +69,6 @@ namespace Questionario_Agrotools.Controllers
             return View(questionarioViewModel);
         }
 
-        // GET: Questionario/Edit/5
         public ActionResult Responder(int? id)
         {
             if (id == null)
@@ -92,9 +85,6 @@ namespace Questionario_Agrotools.Controllers
             return View(questionarioViewModel);
         }
 
-        // POST: Questionario/Edit/5
-        // Para se proteger de mais ataques, habilite as propriedades específicas às quais você quer se associar. Para 
-        // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Responder([Bind(Include = "Questionario,Respostas,LatitudeLongitude")] QuestionarioViewModel questionarioViewModel)
@@ -119,8 +109,7 @@ namespace Questionario_Agrotools.Controllers
             return View(questionarioViewModel);
         }
 
-        // GET: Questionario/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Apagar(int? id)
         {
             if (id == null)
             {
@@ -134,10 +123,9 @@ namespace Questionario_Agrotools.Controllers
             return View(questionario);
         }
 
-        // POST: Questionario/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Apagar")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Apagar(int id)
         {
             Questionario questionario = db.Questionarios.Find(id);
             db.Questionarios.Remove(questionario);

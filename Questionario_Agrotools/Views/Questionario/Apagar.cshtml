@@ -1,15 +1,15 @@
 ﻿@model Questionario_Agrotools.Models.Questionario
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Apagar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Apagar</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Tem certeza que deseja apagar?</h3>
 <div>
-    <h4>Questionario</h4>
+    <h4>Questionário</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -38,12 +38,12 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm("Apagar","Questionario",FormMethod.Post)) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Apagar" class="btn btn-danger" /> |
+            @Html.ActionLink("Voltar", "Index")
         </div>
     }
 </div>
