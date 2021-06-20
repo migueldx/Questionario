@@ -32,6 +32,7 @@ namespace Questionario_Agrotools.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Questionario questionario = db.Questionarios.Find(id);
+            questionario.Perguntas = db.Perguntas.Where(p => p.QuestionarioId == id).ToList();
             if (questionario == null)
             {
                 return HttpNotFound();

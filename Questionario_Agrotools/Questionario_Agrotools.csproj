@@ -128,8 +128,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Contexto\ContextoAgroTools.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PerguntaController.cs" />
     <Compile Include="Controllers\QuestionarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -178,11 +176,6 @@
     <Content Include="Views\Questionario\Visualizar.cshtml" />
     <Content Include="Views\Questionario\Responder.cshtml" />
     <Content Include="Views\Questionario\Index.cshtml" />
-    <Content Include="Views\Pergunta\Create.cshtml" />
-    <Content Include="Views\Pergunta\Delete.cshtml" />
-    <Content Include="Views\Pergunta\Details.cshtml" />
-    <Content Include="Views\Pergunta\Edit.cshtml" />
-    <Content Include="Views\Pergunta\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

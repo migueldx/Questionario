@@ -6,37 +6,24 @@
 }
 
 <h2>Visualizar</h2>
+<div class="form-horizontal">
 
-<div>
     <h4>Questionário</h4>
     <hr />
+
+    <h4>@Html.DisplayFor(model => model.Titulo)</h4>
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Titulo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Titulo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Usuario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DataCadastro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DataCadastro)
-        </dd>
-
+        @{int i = 1;}
+        @foreach (var item in Model.Perguntas)
+        {
+            <dt>@(i++))</dt>
+            <dd>@Html.DisplayFor(itemModel => item.DescricaoPergunta, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })</dd>
+            <dt></dt>
+            <dd>@Html.EditorFor(itemModel => item.DescricaoResposta, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })</dd>
+        }
     </dl>
 </div>
 <p>
     @Html.ActionLink("Voltar", "Index")
 </p>
+
